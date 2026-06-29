@@ -58,11 +58,22 @@ function calcularTurmaLocal(dataNascimento) {
   });
 
   if (!encontrado) {
+    const dataMaisAntiga = new Date(tabela[tabela.length - 1].inicioISO + "T00:00:00");
+    const dataMaisNova   = new Date(tabela[0].fimISO + "T00:00:00");
+
+    let mensagemCustomizada = `A data informada está fora da tabela de referência do ano base ${anoBase}.`;
+    
+    if (input < dataMaisAntiga) {
+      mensagemCustomizada = `Pela data de nascimento informada, o aluno já tem idade superior à 3ª Série e provavelmente já deveria ter concluído o Ensino Médio.`;
+    } else if (input > dataMaisNova) {
+      mensagemCustomizada = `A data informada é muito recente. A criança ainda não possui a idade mínima para ingressar no Berçário no ano letivo de ${anoBase}.`;
+    }
+
     return {
       encontrado: false,
       anoBase,
       tabela,
-      mensagem: `A data informada está fora da tabela de referência do ano base ${anoBase}.`,
+      mensagem: mensagemCustomizada,
     };
   }
 
