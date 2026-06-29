@@ -97,8 +97,6 @@ export default function App() {
   const [resultado,      setResultado]      = useState(null);
   const [erro,           setErro]           = useState("");
   const [anoBase,        setAnoBase]        = useState(anoAtual);
-  const [tabela,         setTabela]         = useState(() => gerarTabela(anoAtual));
-  const [tabelaVisivel,  setTabelaVisivel]  = useState(false);
 
   const handleDateChange = (e) => {
     let val = e.target.value.replace(/\D/g, ""); // Remove não-números
@@ -135,12 +133,8 @@ export default function App() {
     const data = calcularTurmaLocal(dataISO);
     setResultado(data);
 
-    // Atualiza tabela e ano base com os valores gerados agora
-    if (data.tabela)  setTabela(data.tabela);
+    // Atualiza o ano base com os valores gerados agora
     if (data.anoBase) setAnoBase(data.anoBase);
-
-    // Abre a sanfona da tabela após o primeiro cálculo
-    setTabelaVisivel(true);
   };
 
   const handleKeyDown = (e) => {
@@ -237,60 +231,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      {/* ===== REFERENCE TABLE (sanfona) ===== */}
-      <section className="table-section" aria-labelledby="tabela-titulo">
-        <button
-          className="accordion-toggle"
-          onClick={() => setTabelaVisivel((v) => !v)}
-          aria-expanded={tabelaVisivel}
-          aria-controls="tabela-conteudo"
-        >
-          <h2 id="tabela-titulo" className="table-title">
-            Tabela de referência — {anoBase}
-          </h2>
-          <span className={`accordion-icon ${tabelaVisivel ? "accordion-icon--open" : ""}`} aria-hidden="true">
-            ▼
-          </span>
-        </button>
-
-        <div
-          id="tabela-conteudo"
-          className={`accordion-body ${tabelaVisivel ? "accordion-body--open" : ""}`}
-        >
-        <div className="table-wrap">
-          <table className="ref-table" aria-label="Tabela completa de turmas por intervalo de nascimento">
-            <thead>
-              <tr>
-                <th scope="col">Etapa</th>
-                <th scope="col">Turma</th>
-                <th scope="col">Idade alvo</th>
-                <th scope="col">Nascimento de</th>
-                <th scope="col">Nascimento até</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tabela.map((row) => (
-                <tr
-                  key={row.turma}
-                  className={
-                    resultado?.encontrado && resultado.turma === row.turma
-                      ? "row-highlight"
-                      : ""
-                  }
-                >
-                  <td data-label="Etapa">{row.etapa}</td>
-                  <td data-label="Turma" className="turma-cell">{row.turma}</td>
-                  <td data-label="Idade alvo">{row.idadeAlvo}</td>
-                  <td data-label="Nascimento de">{fmt(row.inicioISO)}</td>
-                  <td data-label="Nascimento até">{fmt(row.fimISO)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        </div>
-      </section>
 
       {/* ===== FOOTER ===== */}
       <footer className="footer">
