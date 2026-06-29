@@ -144,16 +144,16 @@ export default function App() {
   return (
     <div className="page">
       {/* ===== HERO / FORM CARD ===== */}
-      <main className="card" aria-label="Formulário de cálculo de turma">
+      <main className="card" aria-label="Formulário de cálculo de etapa">
         <div className="badge">
           <span className="badge-icon" aria-hidden="true">🎓</span>
           <span>Ano base {anoBase}</span>
         </div>
 
-        <h1 className="title">Calculadora de Turma Escolar</h1>
+        <h1 className="title">Calculadora de Etapa Escolar</h1>
 
         <p className="subtitle">
-          Informe a data de nascimento da criança para descobrir a turma indicada
+          Informe a data de nascimento da criança para descobrir a etapa indicada
           conforme a data de corte de <strong>31/03</strong>.
         </p>
 
@@ -188,9 +188,9 @@ export default function App() {
           id="btn-calcular"
           className="btn-primary"
           onClick={calcular}
-          aria-label="Calcular turma"
+          aria-label="Calcular etapa"
         >
-          Calcular turma
+          Calcular etapa
         </button>
 
         {/* ===== RESULT CARD ===== */}
@@ -204,7 +204,7 @@ export default function App() {
               <>
                 <div className="result-header">
                   <span className="result-icon" aria-hidden="true">✅</span>
-                  <span className="result-label">Turma encontrada</span>
+                  <span className="result-label">Etapa encontrada</span>
                 </div>
                 <div className="result-turma">{resultado.turma}</div>
                 <div className="result-grid">
