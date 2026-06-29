@@ -100,15 +100,39 @@ export default function App() {
   const [tabela,         setTabela]         = useState(() => gerarTabela(anoAtual));
   const [tabelaVisivel,  setTabelaVisivel]  = useState(false);
 
+  const handleDateChange = (e) => {
+    let val = e.target.value.replace(/\D/g, ""); // Remove não-números
+    if (val.length > 8) val = val.slice(0, 8);
+    
+    // Aplica a máscara DD/MM/AAAA
+    if (val.length > 4) {
+      val = val.replace(/(\d{2})(\d{2})(\d+)/, "$1/$2/$3");
+    } else if (val.length > 2) {
+      val = val.replace(/(\d{2})(\d+)/, "$1/$2");
+    }
+    setDataNascimento(val);
+  };
+
   const calcular = () => {
-    if (!dataNascimento) {
-      setErro("Por favor, informe a data de nascimento.");
+    if (!dataNascimento || dataNascimento.length !== 10) {
+      setErro("Por favor, digite a data completa (DD/MM/AAAA).");
+      setResultado(null);
+      return;
+    }
+
+    const [dia, mes, ano] = dataNascimento.split("/");
+    const dataISO = `${ano}-${mes}-${dia}`;
+    
+    // Valida se a data existe de verdade (ex: 31/02 não existe)
+    const d = new Date(dataISO + "T00:00:00");
+    if (isNaN(d.getTime())) {
+      setErro("Data inexistente. Verifique os valores digitados.");
       setResultado(null);
       return;
     }
 
     setErro("");
-    const data = calcularTurmaLocal(dataNascimento);
+    const data = calcularTurmaLocal(dataISO);
     setResultado(data);
 
     // Atualiza tabela e ano base com os valores gerados agora
@@ -145,17 +169,18 @@ export default function App() {
           </label>
           <input
             id="data-nascimento"
-            type="date"
+            type="tel"
+            inputMode="numeric"
+            maxLength="10"
+            placeholder="DD/MM/AAAA"
             className="input"
             value={dataNascimento}
-            onChange={(e) => setDataNascimento(e.target.value)}
+            onChange={handleDateChange}
             onKeyDown={handleKeyDown}
-            max={`${anoBase}-12-31`}
-            min={`${anoBase - 18}-01-01`}
             aria-describedby="data-hint"
           />
           <span id="data-hint" className="input-hint">
-            Selecione ou digite a data no formato DD/MM/AAAA
+            Apenas digite os números (dia, mês e ano)
           </span>
         </div>
 
