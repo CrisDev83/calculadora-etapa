@@ -410,6 +410,7 @@ body {
   .result-item-full { grid-column: auto; }
 
   /* Responsive table behavior with data-label pseudo-headers */
+  .ref-table { min-width: 0; }
   .ref-table, .ref-table thead, .ref-table tbody,
   .ref-table th, .ref-table td, .ref-table tr { display: block; }
 
