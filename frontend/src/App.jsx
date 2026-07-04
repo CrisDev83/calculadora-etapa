@@ -147,7 +147,7 @@ export default function App() {
         {/* ===== LOGO ===== */}
         <div className="logo-wrapper">
           <img
-            src="./logoPrefa.png"
+            src={`${import.meta.env.BASE_URL}logoPrefa.png`}
             alt="Logo Prefeitura de Garuva-SC"
             className="logo-prefeitura"
           />
