@@ -508,7 +508,7 @@ body {
    ===================================================== */
 @media (max-width: 480px) {
   body {
-    padding: 1.25rem 0.75rem 2rem;
+    padding: 1.25rem 0 0;
   }
 
   .card {
@@ -582,4 +582,5 @@ body {
   .row-highlight {
     outline: 2px solid var(--blue-500);
   }
+
 }
