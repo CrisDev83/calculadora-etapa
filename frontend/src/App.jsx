@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logoPrefa from "./assets/logoPrefa.png";
 
 // ── Utilitário ───────────────────────────────────────────────────────────────
 
@@ -147,7 +148,7 @@ export default function App() {
       {/* ===== LOGO ===== */}
       <div className="logo-wrapper">
         <img
-          src={`${import.meta.env.BASE_URL}logoPrefa.png`}
+          src={logoPrefa}
           alt="Logo Prefeitura de Garuva-SC"
           className="logo-prefetura"
         />
