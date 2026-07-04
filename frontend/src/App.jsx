@@ -142,7 +142,17 @@ export default function App() {
   };
 
   return (
-    <div className="page">
+    <>
+      <div className="page">
+      {/* ===== LOGO ===== */}
+      <div className="logo-wrapper">
+        <img
+          src="/logoPrefa.png"
+          alt="Logo Prefeitura de Garuva-SC"
+          className="logo-prefetura"
+        />
+      </div>
+
       {/* ===== HERO / FORM CARD ===== */}
       <main className="card" aria-label="Formulário de cálculo de etapa">
         <div className="badge">
@@ -232,10 +242,15 @@ export default function App() {
         )}
       </main>
 
-      {/* ===== FOOTER ===== */}
-      <footer className="footer">
+      <p className="calc-note">
         Cálculo baseado na tabela unificada para o ano base {anoBase}, com data de corte em 31/03.
-      </footer>
+      </p>
     </div>
+
+    {/* ===== FOOTER ===== */}
+    <footer className="footer">
+      Desenvolvido por cub9 &mdash; SME Garuva-SC | 2026
+    </footer>
+    </>
   );
 }
