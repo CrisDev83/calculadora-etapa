@@ -171,14 +171,9 @@ export default function App() {
                 outline: 'none'
               }}
             >
-              <option value={anoAtual - 3}>{anoAtual - 3}</option>
-              <option value={anoAtual - 2}>{anoAtual - 2}</option>
-              <option value={anoAtual - 1}>{anoAtual - 1}</option>
               <option value={anoAtual}>{anoAtual}</option>
               <option value={anoAtual + 1}>{anoAtual + 1}</option>
-              <option value={anoAtual + 2}>{anoAtual + 2}</option>
-              <option value={anoAtual + 3}>{anoAtual + 3}</option>
-              <option value={anoAtual + 3}>{anoAtual + 3}</option>
+
             </select>
           </div>
 
