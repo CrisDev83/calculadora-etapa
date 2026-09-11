@@ -45,9 +45,9 @@ function gerarTabela(anoBase) {
 
 // ── Cálculo local (sem API) ──────────────────────────────────────────────────
 
-function calcularTurmaLocal(dataNascimento) {
+function calcularTurmaLocal(dataNascimento, anoBase) {
   // Ano base lido do sistema no momento do cálculo
-  const anoBase = new Date().getFullYear();
+
   const tabela = gerarTabela(anoBase);
   const input = new Date(dataNascimento + "T00:00:00");
 
@@ -130,11 +130,8 @@ export default function App() {
     }
 
     setErro("");
-    const data = calcularTurmaLocal(dataISO);
+    const data = calcularTurmaLocal(dataISO, anoBase);
     setResultado(data);
-
-    // Atualiza o ano base com os valores gerados agora
-    if (data.anoBase) setAnoBase(data.anoBase);
   };
 
   const handleKeyDown = (e) => {
@@ -155,9 +152,34 @@ export default function App() {
 
         {/* ===== HERO / FORM CARD ===== */}
         <main className="card" aria-label="Formulário de cálculo de etapa">
+
           <div className="badge">
             <span className="badge-icon" aria-hidden="true">🎓</span>
-            <span>Ano base {anoBase}</span>
+            <label htmlFor="select-ano-base" style={{ fontWeight: 600, marginRight: '4px' }}>
+              Ano base
+            </label>
+            <select
+              id="select-ano-base"
+              value={anoBase}
+              onChange={(e) => setAnoBase(Number(e.target.value))}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontWeight: 'bold',
+                color: 'inherit',
+                cursor: 'pointer',
+                outline: 'none'
+              }}
+            >
+              <option value={anoAtual - 3}>{anoAtual - 3}</option>
+              <option value={anoAtual - 2}>{anoAtual - 2}</option>
+              <option value={anoAtual - 1}>{anoAtual - 1}</option>
+              <option value={anoAtual}>{anoAtual}</option>
+              <option value={anoAtual + 1}>{anoAtual + 1}</option>
+              <option value={anoAtual + 2}>{anoAtual + 2}</option>
+              <option value={anoAtual + 3}>{anoAtual + 3}</option>
+              <option value={anoAtual + 3}>{anoAtual + 3}</option>
+            </select>
           </div>
 
           <h1 className="title">Calculadora de Etapa Escolar</h1>
